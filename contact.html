@@ -81,7 +81,12 @@
       <div class="container text-center">
         <h1 class="mb-4">Reach Out To Us</h1>
 
-        <form action="#" method="post" class="p-sm-5 shadow p-3">
+        <form
+          action="#"
+          method="post"
+          class="p-sm-5 shadow p-3"
+          onsubmit="return validateForm()"
+        >
           <div class="row g-4">
             <!-- Last name -->
             <div class="col-md-6">
@@ -91,6 +96,8 @@
                   placeholder="Enter your last name..."
                   class="form-control"
                   name="last_name"
+                  id="last_name"
+                  required
                 />
               </div>
             </div>
@@ -102,6 +109,8 @@
                   placeholder="Enter your other names..."
                   class="form-control"
                   name="other_names"
+                  id="other_names"
+                  required
                 />
               </div>
             </div>
@@ -116,14 +125,21 @@
                   placeholder="Enter your email address..."
                   class="form-control"
                   name="email_address"
+                  id="email_address"
+                  required
                 />
               </div>
             </div>
             <!-- Type of message -->
             <div class="col-md-6">
               <div class="form-group">
-                <select name="message_type" class="form-control">
-                  <option disabled selected>Select a reason</option>
+                <select
+                  name="message_type"
+                  id="message_type"
+                  class="form-control"
+                  required
+                >
+                  <option disabled selected value="0">Select a reason</option>
                   <option value="testimony">Testimony</option>
                   <option value="other">Other</option>
                 </select>
@@ -136,9 +152,11 @@
             <div class="form-group">
               <textarea
                 name="message"
+                id="message"
                 rows="10"
                 class="form-control"
                 placeholder="Type your message here..."
+                required
               ></textarea>
             </div>
           </div>
@@ -194,3 +212,24 @@
     </footer>
   </body>
 </html>
+
+<script>
+  function validateForm() {
+    var last_name = document.getElementById("last_name").value;
+    var other_names = document.getElementById("other_names").value;
+    var email_address = document.getElementById("email_address").value;
+    var message = document.getElementById("message").value;
+    var message_type = document.getElementById("message_type").value;
+
+    if (
+      last_name.trim() == "" ||
+      other_names.trim() == "" ||
+      email_address.trim() == "" ||
+      message.trim() == "" ||
+      message_type == 0
+    ) {
+      alert("Message fields can not be empty!");
+      return false;
+    }
+  }
+</script>
